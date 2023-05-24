@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: "trading-eagle"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "docker-nest-postgres"
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/postgresvol12
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "6379:6379"
